@@ -1,5 +1,23 @@
 {
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/egg-chicken/grid.git"
+  },
+  "name": "grid",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./out/index.js",
+  "description": "this is test package",
+  "scripts": {
+    "lint": "coffeelint src",
+    "test": "mocha --compilers coffee:coffee-script/register",
+    "postinstall": "coffee -b -o out/ -c src/*"
+  },
+  "dependencies": {
+    "coffee-script": "^1.10.0"
+  },
   "devDependencies": {
+    "coffeelint": "^1.15.7",
+    "mocha": "^2.5.3"
   }
 }
