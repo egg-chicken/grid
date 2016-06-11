@@ -24,8 +24,11 @@ module.exports = class Board
         @table.isCover(next)
 
   each: (f) ->
-    @table.each (piece, x, y) ->
-      f(piece, x, y) if piece
+    done = {}
+    @table.eachp (piece, point) ->
+      if piece && not(done[piece.id])
+        f(piece, point)
+        done[piece.id] = true
 
   _move: (position, action) ->
     piece = @get(position)

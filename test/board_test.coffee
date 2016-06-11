@@ -22,13 +22,20 @@ describe 'Board', ->
   describe '#each', ->
     it '配置済み Character に対して繰り返しが行われること', ->
       @board.set(new Point(1, 1), new Character('B'))
-      @board.each (character, x, y)->
+      @board.each (character, point)->
         if character.name == 'A'
-          assert.equal(x, 5)
-          assert.equal(y, 5)
+          assert.equal(point.x, 5)
+          assert.equal(point.y, 5)
         else
-          assert.equal(x, 1)
-          assert.equal(y, 1)
+          assert.equal(point.x, 1)
+          assert.equal(point.y, 1)
+    it 'board 上で操作が行われたとしても 2回以上同じ Character が繰り返しに出現しないこと', ->
+      callCount = 0
+      @board.each (character, p) =>
+        callCount += 1
+        @board.set(@position, null)
+        @board.set(@position.down(), character)
+      assert.equal(callCount, 1)
 
   describe '#isAble', ->
     it '有効なコマンドのとき true を返すこと', ->
