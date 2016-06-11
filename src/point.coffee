@@ -1,4 +1,9 @@
 module.exports = class Point
+  @random: (xmax, ymax, xmin = 0, ymin = 0) ->
+    x = Math.floor(Math.random() * (xmax - xmin)) + xmin
+    y = Math.floor(Math.random() * (ymax - ymin)) + ymin
+    new Point(x, y)
+
   constructor: (@x, @y)->
 
   equal: (point)->
