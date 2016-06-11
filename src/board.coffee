@@ -24,10 +24,10 @@ module.exports = class Board
         @table.isCover(next)
 
   each: (f) ->
-    @table.each (piece, x, y)->
+    @table.each (piece, x, y) ->
       f(piece, x, y) if piece
 
-  _move: (position, action)->
-    piece = @table.get(position)
-    @table.set(position[action](), piece)
+  _move: (position, action) ->
+    piece = @get(position)
+    @set(position[action](), piece)
     @table.delete(position)
