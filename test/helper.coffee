@@ -6,8 +6,10 @@ grequire = (hash)->
       global[name] = require(path)
 
 grequire(
-  assert:  'assert'
-  Module:  'module'
-  Point:   'point'
+  assert: 'assert'
+  Module: 'module'
+  Point: 'point'
   Array2D: 'array2d'
+  Board: 'board'
+  Character: 'character'
 )
