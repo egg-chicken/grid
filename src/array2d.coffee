@@ -26,6 +26,12 @@ class Array2D
     @_check(x, y)
     @rows[y][x]
 
+  delete: (x, y)->
+    if x instanceof Point
+      @set(x, null)
+    else
+      @set(x, y, null)
+
   each: (f)->
     for y in [0...@height]
       for x in [0...@width]

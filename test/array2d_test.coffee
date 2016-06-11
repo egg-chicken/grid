@@ -37,6 +37,15 @@ describe 'Array2D', ->
         else
           assert(value < 10)
 
+  describe '#delete', ->
+    it 'int で指定した座標の値が消えること', ->
+      @table.delete(1, 2)
+      assert.equal(@table.get(1,2), null)
+
+    it 'Point で指定した座標の値が消えること', ->
+      @table.delete(new Point(1, 2))
+      assert.equal(@table.get(1,2), null)
+
   describe '#rotate', ->
     it '時計回りに90度回転した２次元配列が得られること', ->
       rotated = @table.rotate()
