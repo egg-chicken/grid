@@ -2,6 +2,6 @@ module.exports = {
   Module: require('./module')
   Point: require('./point')
   Array2D: require('./array2d')
-  Character: require('./character')
+  Piece: require('./piece')
   Board: require('./board')
 }

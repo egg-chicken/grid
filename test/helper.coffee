@@ -11,5 +11,5 @@ grequire(
   Point: 'point'
   Array2D: 'array2d'
   Board: 'board'
-  Character: 'character'
+  Piece: 'piece'
 )

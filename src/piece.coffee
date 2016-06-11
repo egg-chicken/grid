@@ -1,6 +1,6 @@
 count = 0
 
-module.exports = class Character
+module.exports = class Piece
   constructor: (@name) ->
     count += 1
     @id = count
