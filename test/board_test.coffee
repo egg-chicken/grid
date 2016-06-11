@@ -18,3 +18,14 @@ describe 'Board', ->
       @board._move(@position, 'up')
       assert.equal(@board.get(@position), null)
       assert.equal(@board.get(@position.up()), @character)
+
+  describe '#each', ->
+    it '配置済み Character に対して繰り返しが行われること', ->
+      @board.set(new Point(1, 1), new Character('B'))
+      @board.each (character, x, y)->
+        if character.name == 'A'
+          assert.equal(x, 5)
+          assert.equal(y, 5)
+        else
+          assert.equal(x, 1)
+          assert.equal(y, 1)

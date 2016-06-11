@@ -17,6 +17,10 @@ module.exports = class Board
       else
         throw new Error('unknown action called')
 
+  each: (f) ->
+    @table.each (piece, x, y)->
+      f(piece, x, y) if piece
+
   _move: (position, action)->
     piece = @table.get(position)
     @table.set(position[action](), piece)
