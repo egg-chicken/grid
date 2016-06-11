@@ -58,6 +58,9 @@ class Array2D
   toString: ->
     @rows.join("\n")
 
+  isCover: (p) ->
+    p.x >= 0 && p.y >= 0 && p.y < @height && p.x < @width
+
   _initialize_by_size_and_value: (@width, @height, value) ->
     @rows = []
     for y in [0...@height]

@@ -29,3 +29,10 @@ describe 'Board', ->
         else
           assert.equal(x, 1)
           assert.equal(y, 1)
+
+  describe '#isAble', ->
+    it '有効なコマンドのとき true を返すこと', ->
+      assert.ok(@board.isAble(@position, 'up'))
+    it '枠外へ移動しようとする command に対して false を返すこと', ->
+      corner = new Point(9, 9)
+      assert.ok(not @board.isAble(corner, 'down'))

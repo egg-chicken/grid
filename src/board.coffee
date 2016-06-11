@@ -17,6 +17,12 @@ module.exports = class Board
       else
         throw new Error('unknown action called')
 
+  isAble: (position, action, args) ->
+    switch(action)
+      when 'up', 'down', 'left', 'right'
+        next = position[action]()
+        @table.isCover(next)
+
   each: (f) ->
     @table.each (piece, x, y)->
       f(piece, x, y) if piece

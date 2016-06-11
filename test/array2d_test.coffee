@@ -69,3 +69,10 @@ describe 'Array2D', ->
     it '周に対して操作が行われること', ->
       @table.eachRound (val, x, y) =>
         assert.equal(@table.get(x, y), 0)
+
+  describe '#isCover', ->
+    it '範囲内のとき true を返すこと', ->
+      assert.ok(@table.isCover(new Point(4, 2)))
+
+    it '範囲外のとき false を返すこと', ->
+      assert.ok(not @table.isCover(new Point(5, 2)))
