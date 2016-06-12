@@ -7,3 +7,12 @@ module.exports = class Piece extends require('./module')
 
   toString: ->
     @name
+
+  damage: ->
+    @dead = true
+
+  isDead: ->
+    @dead
+
+  isAlive: ->
+    not @dead

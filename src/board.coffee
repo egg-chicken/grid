@@ -14,6 +14,8 @@ module.exports = class Board
     switch(action)
       when 'up', 'down', 'left', 'right'
         @_move(position, action)
+      when 'attack'
+        @_attack(position, args.direction)
       else
         throw new Error('unknown action called')
 
@@ -34,3 +36,7 @@ module.exports = class Board
     piece = @get(position)
     @set(position[action](), piece)
     @table.delete(position)
+
+  _attack: (position, direction) ->
+    target = @get(position[direction]())
+    target.damage()

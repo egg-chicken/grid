@@ -19,6 +19,11 @@ describe 'Board', ->
       assert.equal(@board.get(@position), null)
       assert.equal(@board.get(@position.up()), @piece)
 
+  describe '#_attack', ->
+    it '対象の Piece#damage が実行されること', ->
+      @board._attack(@position.down(), 'up')
+      assert.ok(@piece.isDead())
+
   describe '#each', ->
     it '配置済み Piece に対して繰り返しが行われること', ->
       @board.set(new Point(1, 1), new Piece('B'))
