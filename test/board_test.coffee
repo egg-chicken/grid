@@ -9,7 +9,7 @@ describe 'Board', ->
 
   describe '#command', ->
     it '未知の操作が呼び出された時エラーとなること', ->
-      command = => @board.command(@position, 'something')
+      command = => @board.command(@position, new Action(name: 'something'))
       assert.throws(command, /unknown action called/)
 
   describe '#_move', ->

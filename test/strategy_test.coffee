@@ -9,7 +9,7 @@ describe 'Strategy', ->
     it 'なんらかのアクションを返すこと', ->
       @board.set(new Point(8, 8), new Piece())
       @board.set(new Point(3, 4), new Piece())
-      assert.equal(@strategy.aggressive(new Point(3, 4)), 'down')
+      assert.ok(@strategy.aggressive(new Point(3, 4)) instanceof Action)
 
   describe '#_approach', ->
     it '目標に応じて正しい方向を返すこと', ->

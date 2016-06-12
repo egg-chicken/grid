@@ -13,4 +13,5 @@ grequire(
   Board: 'board'
   Piece: 'piece'
   Strategy: 'strategy'
+  Action: 'action'
 )

@@ -1,23 +1,31 @@
-module.exports = class Strategy
-  DIRECTIONS = ['up', 'down', 'left', 'right']
+Action = require('./action')
 
+module.exports = class Strategy
   constructor: (@board) ->
 
   aggressive: (current) ->
     target = @_nearestEnemy(current)
-    @_approach(current, target) || @_random(current)
+    if not(target)
+      new Action('move', @_random(current))
+    if current.distance(target) == 1
+      new Action('attack', @_approach(current, target))
+    else
+      new Action('move', @_approach(current, target))
 
   difensive: (current)->
     target = @_nearestFriend(current)
-    @_approach(current, target) || @_random(current)
+    if not(target)
+      new Action('move', @_random(current))
+    else
+      new Action('move', @_approach(current, target))
 
   _random: (current) ->
-    n = Math.floor(Math.random() * DIRECTIONS.length)
-    DIRECTIONS[n] if @board.isMovable(current, DIRECTIONS[n])
+    n = Math.floor(Math.random() * Action.DIRECTIONS.length)
+    Action.DIRECTIONS[n] if @board.isMovable(current, Action.DIRECTIONS[n])
 
   _approach: (current, target) ->
     currentDistance = current.distance(target)
-    for dir in DIRECTIONS
+    for dir in Action.DIRECTIONS
       continue unless @board.isMovable(current, dir)
       next = current[dir]()
       if next.distance(target) < currentDistance

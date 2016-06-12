@@ -11,12 +11,10 @@ module.exports = class Board
   get: (position, piece) ->
     @table.get(position)
 
-  command: (position, action, args) ->
-    switch(action)
-      when 'up', 'down', 'left', 'right'
-        @_move(position, action)
-      when 'attack'
-        @_attack(position, args.direction)
+  command: (position, action) ->
+    switch(action.name)
+      when 'move' then @_move(position, action.target)
+      when 'attack' then @_attack(position, action.target)
       else
         throw new Error('unknown action called')
 
