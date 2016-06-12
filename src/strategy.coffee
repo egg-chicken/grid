@@ -1,4 +1,6 @@
 module.exports = class Strategy
+  DIRECTIONS = ['up', 'down', 'left', 'right']
+
   constructor: (@board) ->
 
   aggressive: (current) ->
@@ -10,14 +12,13 @@ module.exports = class Strategy
     @_approach(current, target) || @_random(current)
 
   _random: (current) ->
-    commands = ['up', 'down', 'left', 'right']
-    n = Math.floor(Math.random() * commands.length)
-    commands[n] if @board.isAble(current, commands[n])
+    n = Math.floor(Math.random() * DIRECTIONS.length)
+    DIRECTIONS[n] if @board.isMovable(current, DIRECTIONS[n])
 
   _approach: (current, target) ->
     currentDistance = current.distance(target)
-    for dir in ['up', 'down', 'left', 'right']
-      continue unless @board.isAble(current, dir)
+    for dir in DIRECTIONS
+      continue unless @board.isMovable(current, dir)
       next = current[dir]()
       if next.distance(target) < currentDistance
         return dir

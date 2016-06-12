@@ -44,11 +44,11 @@ describe 'Board', ->
         @piece.dead = true
         assert.ok(piece.isAlive())
 
-  describe '#isAble', ->
+  describe '#isMovable', ->
     it '有効なコマンドのとき true を返すこと', ->
-      assert.ok(@board.isAble(@position, 'up'))
+      assert.ok(@board.isMovable(@position, 'up'))
     it '枠外へ移動しようとする command に対して false を返すこと', ->
       corner = new Point(9, 9)
-      assert.ok(not @board.isAble(corner, 'down'))
+      assert.ok(not @board.isMovable(corner, 'down'))
     it '既に Piece がある枠へ移動しようとする時 false を返すこと', ->
-      assert.ok(not @board.isAble(new Point(4, 5), 'right'))
+      assert.ok(not @board.isMovable(new Point(4, 5), 'right'))

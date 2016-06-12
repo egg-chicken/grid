@@ -20,11 +20,9 @@ module.exports = class Board
       else
         throw new Error('unknown action called')
 
-  isAble: (position, action, args) ->
-    switch(action)
-      when 'up', 'down', 'left', 'right'
-        next = position[action]()
-        @table.isCover(next) && not(@get(next))
+  isMovable: (position, direction) ->
+    next = position[direction]()
+    @table.isCover(next) && not(@get(next))
 
   each: (f) ->
     done = {}
