@@ -15,6 +15,7 @@ module.exports = class Board
     switch(action.name)
       when 'move' then @_move(position, action.target)
       when 'attack' then @_attack(position, action.target)
+      when 'nothing' then return
       else
         throw new Error('unknown action called')
 
