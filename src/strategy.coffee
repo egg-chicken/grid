@@ -7,8 +7,8 @@ module.exports = class Strategy
     target = @_nearestEnemy(current)
     if not(target)
       new Action('move', @_random(current))
-    if current.distance(target) == 1
-      new Action('attack', @_approach(current, target))
+    else if current.distance(target) == 1
+      new Action('attack', current.where(target))
     else
       new Action('move', @_approach(current, target))
 

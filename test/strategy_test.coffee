@@ -6,10 +6,19 @@ describe 'Strategy', ->
     @strategy = new Strategy(@board)
 
   describe '#aggresive', ->
-    it 'なんらかのアクションを返すこと', ->
+    it '離れている時 move Action を返すこと', ->
       @board.set(new Point(8, 8), new Piece())
-      @board.set(new Point(3, 4), new Piece())
-      assert.ok(@strategy.aggressive(new Point(3, 4)) instanceof Action)
+      @board.set(new Point(3, 8), new Piece())
+      action = @strategy.aggressive(new Point(3, 8))
+      assert.deepEqual(action, new Action('move', 'right'))
+    it '近くにいる時 attack Action を返すこと', ->
+      @board.set(new Point(4, 8), new Piece())
+      @board.set(new Point(3, 8), new Piece())
+      action = @strategy.aggressive(new Point(3, 8))
+      assert.deepEqual(action, new Action('attack', 'right'))
+    it '自分しかいない時 move Action を返すこと', ->
+      @board.set(new Point(0, 0), new Piece())
+      assert.equal(@strategy.aggressive(new Point(0, 0)).name, 'move')
 
   describe '#_approach', ->
     it '目標に応じて正しい方向を返すこと', ->
@@ -32,7 +41,7 @@ describe 'Strategy', ->
     it '距離ゼロ(自分自身の位置)を返さないこと', ->
       @board.set(new Point(0, 0), new Piece())
       @board.set(new Point(9, 9), new Piece())
-      assert.ok(not @strategy._nearest(new Point(0, 0)).equal(new Point(0, 0)))
+      assert.deepEqual(@strategy._nearest(new Point(0, 0)), new Point(9, 9))
 
   describe '#_nearestFriend', ->
     beforeEach ->
