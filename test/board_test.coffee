@@ -25,15 +25,13 @@ describe 'Board', ->
       assert.ok(@piece.isDead())
 
   describe '#each', ->
-    it '配置済み Piece に対して繰り返しが行われること', ->
+    beforeEach ->
       @board.set(new Point(1, 1), new Piece('B'))
-      @board.each (piece, point)->
-        if piece.name == 'A'
-          assert.equal(point.x, 5)
-          assert.equal(point.y, 5)
-        else
-          assert.equal(point.x, 1)
-          assert.equal(point.y, 1)
+    it '配置済み Piece に対して繰り返しが行われること', ->
+      @board.each (piece, p)->
+        a = (piece.name == 'A' && p.equal(new Point(5, 5)))
+        b = (piece.name == 'B' && p.equal(new Point(1, 1)))
+        assert.ok(a || b)
     it 'board 上で操作が行われたとしても 2回以上同じ Piece が繰り返しに出現しないこと', ->
       callCount = 0
       @board.each (piece, p) =>
@@ -41,6 +39,10 @@ describe 'Board', ->
         @board.set(@position, null)
         @board.set(@position.down(), piece)
       assert.equal(callCount, 1)
+    it '繰り返しの最終に死んだ Piece は出現しないこと', ->
+      @board.each (piece, p) =>
+        @piece.dead = true
+        assert.ok(piece.isAlive())
 
   describe '#isAble', ->
     it '有効なコマンドのとき true を返すこと', ->
