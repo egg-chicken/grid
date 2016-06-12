@@ -1,6 +1,9 @@
 Action = require('./action')
+Module = require('./module')
 
-module.exports = class Strategy
+module.exports = class Strategy extends Module
+  @include(require('./strategy/nearest'))
+
   constructor: (@board) ->
 
   aggressive: (current) ->
@@ -10,14 +13,14 @@ module.exports = class Strategy
     else if current.distance(target) == 1
       new Action('attack', current.where(target))
     else
-      new Action('move', @_approach(current, target))
+      new Action('move', @_approach(current, target) || @_random(current))
 
   difensive: (current)->
     target = @_nearestFriend(current)
     if not(target)
       new Action('move', @_random(current))
     else
-      new Action('move', @_approach(current, target))
+      new Action('move', @_approach(current, target) || @_random(current))
 
   _random: (current) ->
     dirs = []
@@ -33,18 +36,3 @@ module.exports = class Strategy
       if next.distance(target) < currentDistance
         return dir
     null
-
-  _nearestFriend: (current)->
-    myPiece = @board.get(current)
-    @board.min (piece, position) =>
-      if myPiece.isFriend(piece) then position.distance(current) else Infinity
-
-  _nearestEnemy: (current)->
-    myPiece = @board.get(current)
-    @board.min (piece, position) =>
-      if myPiece.isEnemy(piece) then position.distance(current) else Infinity
-
-  _nearest: (current) ->
-    @board.min (piece, position) =>
-      d = position.distance(current)
-      if d > 0 then d else Infinity
