@@ -1,7 +1,9 @@
 count = 0
 
 module.exports = class Piece extends require('./module')
-  constructor: (@name) ->
+  constructor: (options = {}) ->
+    @name = options.name
+    @teamCode = options.teamCode
     count += 1
     @id = count
 

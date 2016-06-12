@@ -3,7 +3,7 @@ require('./helper')
 describe 'Board', ->
   beforeEach ->
     @position = new Point(5,5)
-    @piece = new Piece('A')
+    @piece = new Piece(name: 'A')
     @board = new Board(10,10)
     @board.set(@position, @piece)
 
@@ -26,7 +26,7 @@ describe 'Board', ->
 
   describe '#each', ->
     beforeEach ->
-      @board.set(new Point(1, 1), new Piece('B'))
+      @board.set(new Point(1, 1), new Piece(name: 'B'))
     it '配置済み Piece に対して繰り返しが行われること', ->
       @board.each (piece, p)->
         a = (piece.name == 'A' && p.equal(new Point(5, 5)))

@@ -7,7 +7,7 @@ describe 'Strategy', ->
 
   describe '#plan', ->
     it 'なんらかのアクションを返すこと', ->
-      @board.set(new Point(8, 8), new Piece('A'))
+      @board.set(new Point(8, 8), new Piece())
       assert.equal(@strategy.plan(new Point(3, 4)), 'down')
 
   describe '#_approach', ->
@@ -18,7 +18,7 @@ describe 'Strategy', ->
       assert.equal(@strategy._approach(current, new Point(9, 3)), 'right')
       assert.equal(@strategy._approach(current, new Point(0, 3)), 'left')
     it '障害物がある時、障害物の方向を差さないこと', ->
-      @board.set(new Point(3, 4), new Piece('A'))
+      @board.set(new Point(3, 4), new Piece())
       current = new Point(3, 3)
       assert.ok(@strategy._approach(current, new Point(3, 10)) != 'down')
 
