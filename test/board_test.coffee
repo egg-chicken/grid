@@ -43,3 +43,5 @@ describe 'Board', ->
     it '枠外へ移動しようとする command に対して false を返すこと', ->
       corner = new Point(9, 9)
       assert.ok(not @board.isAble(corner, 'down'))
+    it '既に Piece がある枠へ移動しようとする時 false を返すこと', ->
+      assert.ok(not @board.isAble(new Point(4, 5), 'right'))

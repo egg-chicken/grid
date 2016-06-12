@@ -21,7 +21,7 @@ module.exports = class Board
     switch(action)
       when 'up', 'down', 'left', 'right'
         next = position[action]()
-        @table.isCover(next)
+        @table.isCover(next) && not(@get(next))
 
   each: (f) ->
     done = {}
