@@ -20,8 +20,10 @@ module.exports = class Strategy
       new Action('move', @_approach(current, target))
 
   _random: (current) ->
-    n = Math.floor(Math.random() * Action.DIRECTIONS.length)
-    Action.DIRECTIONS[n] if @board.isMovable(current, Action.DIRECTIONS[n])
+    dirs = []
+    for dir in Action.DIRECTIONS
+      dirs.push(dir) if @board.isMovable(current, dir)
+    dirs[Math.floor(Math.random() * dirs.length)]
 
   _approach: (current, target) ->
     currentDistance = current.distance(target)
