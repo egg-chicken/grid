@@ -5,10 +5,11 @@ describe 'Strategy', ->
     @board = new Board(10, 10)
     @strategy = new Strategy(@board)
 
-  describe '#plan', ->
+  describe '#aggresive', ->
     it 'なんらかのアクションを返すこと', ->
       @board.set(new Point(8, 8), new Piece())
-      assert.equal(@strategy.plan(new Point(3, 4)), 'down')
+      @board.set(new Point(3, 4), new Piece())
+      assert.equal(@strategy.aggressive(new Point(3, 4)), 'down')
 
   describe '#_approach', ->
     it '目標に応じて正しい方向を返すこと', ->
@@ -32,3 +33,16 @@ describe 'Strategy', ->
       @board.set(new Point(0, 0), new Piece())
       @board.set(new Point(9, 9), new Piece())
       assert.ok(not @strategy._nearest(new Point(0, 0)).equal(new Point(0, 0)))
+
+  describe '#_nearestFriend', ->
+    beforeEach ->
+      @board.set(new Point(1, 0), new Piece(teamCode: 1))
+      @board.set(new Point(5, 5), new Piece(teamCode: 1))
+      @board.set(new Point(2, 0), new Piece(teamCode: 2))
+    it '仲間を返すこと', ->
+      friend = @strategy._nearestFriend(new Point(1, 0))
+      assert.equal(@board.get(friend).teamCode, 1)
+    it '自分は仲間に含めないこと', ->
+      me = @board.get(new Point(1, 0))
+      friend = @strategy._nearestFriend(new Point(1, 0))
+      assert.ok(not @board.get(friend).equal(me))

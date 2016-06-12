@@ -1,8 +1,12 @@
 module.exports = class Strategy
   constructor: (@board) ->
 
-  plan: (current)->
-    target = @_nearest(current)
+  aggressive: (current) ->
+    target = @_nearestEnemy(current)
+    @_approach(current, target)
+
+  difensive: (current)->
+    target = @_nearestFriend(current)
     @_approach(current, target)
 
   _approach: (current, target) ->
@@ -12,6 +16,16 @@ module.exports = class Strategy
       next = current[dir]()
       if next.distance(target) < currentDistance
         return dir
+
+  _nearestFriend: (current)->
+    myPiece = @board.get(current)
+    @board.min (piece, position) =>
+      if myPiece.isFriend(piece) then position.distance(current) else Infinity
+
+  _nearestEnemy: (current)->
+    myPiece = @board.get(current)
+    @board.min (piece, position) =>
+      if myPiece.isEnemy(piece) then position.distance(current) else Infinity
 
   _nearest: (current) ->
     @board.min (piece, position) =>

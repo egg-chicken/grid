@@ -18,3 +18,14 @@ module.exports = class Piece extends require('./module')
 
   isAlive: ->
     not @dead
+
+  isFriend: (piece) ->
+    return null if @equal(piece)
+    @teamCode && @teamCode == piece.teamCode
+
+  isEnemy: (piece) ->
+    return null if @equal(piece)
+    not @isFriend(piece)
+
+  equal: (p)->
+    @id == p.id
