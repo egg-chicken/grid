@@ -27,8 +27,8 @@ describe 'Strategy', ->
     it '一番近い Piece を返すこと', ->
       @board.set(new Point(1, 0), new Piece())
       @board.set(new Point(5, 5), new Piece())
-      assert.ok(@strategy._nearest(new Point(3, 1)).equal(new Point(1, 0)))
-      assert.ok(@strategy._nearest(new Point(4, 2)).equal(new Point(5, 5)))
+      assert.deepEqual(@strategy._nearest(new Point(3, 1)), new Point(1, 0))
+      assert.deepEqual(@strategy._nearest(new Point(4, 2)), new Point(5, 5))
     it '距離ゼロ(自分自身の位置)を返さないこと', ->
       @board.set(new Point(0, 0), new Piece())
       @board.set(new Point(9, 9), new Piece())
