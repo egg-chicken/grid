@@ -4,4 +4,5 @@ module.exports = {
   Array2D: require('./array2d')
   Piece: require('./piece')
   Board: require('./board')
+  Strategy: require('./strategy')
 }

@@ -12,4 +12,5 @@ grequire(
   Array2D: 'array2d'
   Board: 'board'
   Piece: 'piece'
+  Strategy: 'strategy'
 )
