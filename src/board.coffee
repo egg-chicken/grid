@@ -1,4 +1,5 @@
 Array2D = require('./array2d')
+Enum = require('./enum')
 
 module.exports = class Board
   constructor: (width, height) ->
@@ -31,6 +32,8 @@ module.exports = class Board
       if piece && not(done[piece.id]) && piece.isAlive()
         f(piece, point)
         done[piece.id] = true
+
+  min: -> Enum.min.apply(@, arguments)?[1]
 
   _move: (position, action) ->
     piece = @get(position)

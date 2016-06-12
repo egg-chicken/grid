@@ -14,9 +14,6 @@ module.exports = class Strategy
         return dir
 
   _nearest: (current) ->
-    min = null
-    @board.each (piece, position) ->
+    @board.min (piece, position) =>
       d = position.distance(current)
-      if (min == null || d < min.distance(current)) && d > 0
-        min = position
-    min
+      if d > 0 then d else Infinity
