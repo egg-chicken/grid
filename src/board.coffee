@@ -38,5 +38,6 @@ module.exports = class Board
     @table.delete(position)
 
   _attack: (position, direction) ->
+    actor  = @get(position)
     target = @get(position[direction]())
-    target.damage()
+    actor.attack(target)

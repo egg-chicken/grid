@@ -6,12 +6,20 @@ module.exports = class Piece extends require('./module')
     @teamCode = options.teamCode
     count += 1
     @id = count
+    @health = options.health || 1
+    @power = options.power || 1
 
   toString: ->
     @name
 
-  damage: ->
-    @dead = true
+  attack: (target)->
+    target.damage(@power)
+
+  damage: (point)->
+    @health -= point
+    if @health <= 0
+      @health = 0
+      @dead = true
 
   isDead: ->
     @dead

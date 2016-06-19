@@ -24,6 +24,7 @@ describe 'Board', ->
 
   describe '#_attack', ->
     it '対象の Piece#damage が実行されること', ->
+      @board.set(@position.down(), new Piece())
       @board._attack(@position.down(), 'up')
       assert.ok(@piece.isDead())
 
