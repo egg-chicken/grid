@@ -5,4 +5,5 @@ module.exports = {
   Piece: require('./piece')
   Board: require('./board')
   Strategy: require('./strategy')
+  Team: require('./team')
 }
