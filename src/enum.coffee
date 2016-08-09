@@ -8,4 +8,11 @@ module.exports = {
         minValue = value
         result = arguments
     result
+
+  any: (iteratee) ->
+    flag = false
+    @each ->
+      return if flag
+      flag = iteratee.apply(@, arguments)
+    flag
 }

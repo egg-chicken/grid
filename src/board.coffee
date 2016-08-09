@@ -31,6 +31,7 @@ module.exports = class Board
         done[piece.id] = true
 
   min: -> Enum.min.apply(@, arguments)?[1]
+  any: -> Enum.any.apply(@, arguments)
 
   _move: (position, action) ->
     piece = @get(position)

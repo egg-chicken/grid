@@ -56,3 +56,18 @@ describe 'Board', ->
       assert.ok(not @board.isMovable(corner, 'down'))
     it '既に Piece がある枠へ移動しようとする時 false を返すこと', ->
       assert.ok(not @board.isMovable(new Point(4, 5), 'right'))
+
+  describe '#any', ->
+    it '最後の要素が条件をみたすとき true を返すこと', ->
+      @board.set(new Point(4,4), new Piece(teamCode: 1))
+      @board.set(new Point(5,5), new Piece(teamCode: 2))
+      @board.set(new Point(6,6), new Piece(teamCode: 3))
+      alive = @board.any (piece, point) -> piece.teamCode == 3
+      assert.ok(alive)
+
+    it '一つも条件を満たす要素がないとき false を返すこと', ->
+      @board.set(new Point(4,4), new Piece(teamCode: 1))
+      @board.set(new Point(5,5), new Piece(teamCode: 2))
+      @board.set(new Point(6,6), new Piece(teamCode: 3))
+      alive = @board.any (piece, point) -> piece.teamCode == 4
+      assert.ok(not alive)
