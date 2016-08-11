@@ -11,6 +11,9 @@ module.exports = class Board
   get: (position, piece) ->
     @table.get(position)
 
+  remove: (p) ->
+    @table.delete(p)
+
   command: (position, action) ->
     switch(action.name)
       when 'move' then @_move(position, action.target)
@@ -32,6 +35,7 @@ module.exports = class Board
 
   min: -> Enum.min.apply(@, arguments)?[1]
   any: -> Enum.any.apply(@, arguments)
+  find: -> Enum.find.apply(@, arguments)
 
   _move: (position, action) ->
     piece = @get(position)

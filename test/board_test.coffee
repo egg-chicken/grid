@@ -67,3 +67,12 @@ describe 'Board', ->
       @board.set(new Point(6,6), new Piece(teamCode: 3))
       alive = @board.any (piece, point) -> piece.teamCode == 4
       assert.ok(not alive)
+
+  describe '#find', ->
+    it '条件をみたす要素がないとき null を返すこと', ->
+      assert.equal(@board.find((piece) -> piece.name == 'test'), null)
+
+    it '条件をみたす要素があるとき その要素を返すこと', ->
+      @piece = new Piece(name: "test")
+      @board.set(new Point(9,9), @piece)
+      assert.equal(@board.find((piece) -> piece.name == 'test'), @piece)

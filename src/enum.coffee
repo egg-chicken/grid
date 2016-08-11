@@ -15,4 +15,11 @@ module.exports = {
       return if flag
       flag = iteratee.apply(@, arguments)
     flag
+
+  find: (iteratee) ->
+    found = null
+    @each (i)->
+      return if found
+      found = i if iteratee.apply(@, arguments)
+    found
 }
