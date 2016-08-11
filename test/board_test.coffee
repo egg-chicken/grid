@@ -43,10 +43,6 @@ describe 'Board', ->
         @board.set(@position, null)
         @board.set(@position.down(), piece)
       assert.equal(callCount, 1)
-    it '繰り返しの最終に死んだ Piece は出現しないこと', ->
-      @board.each (piece, p) =>
-        @piece.dead = true
-        assert.ok(piece.isAlive())
 
   describe '#isMovable', ->
     it '有効なコマンドのとき true を返すこと', ->

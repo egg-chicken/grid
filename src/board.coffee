@@ -26,7 +26,7 @@ module.exports = class Board
   each: (f) ->
     done = {}
     @table.eachp (piece, point) ->
-      if piece && not(done[piece.id]) && piece.isAlive()
+      if piece && not(done[piece.id])
         f(piece, point)
         done[piece.id] = true
 
